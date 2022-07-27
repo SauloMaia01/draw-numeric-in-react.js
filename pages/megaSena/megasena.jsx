@@ -1,10 +1,11 @@
-import { useStates } from "react"
+import { useState } from "react"
 import { mega } from "../../functions/mega"
 import NumeroDisplay from "../../components/NumeroDisplay"
 
 export default function megasena() {
 
-    const [numeros, setNumeros] = useStates(mega())
+    const [qtde, setQtde] = useState(6)
+    const [numeros, setNumeros] = useState(mega(qtde))
 
     function renderizarNumeros() {
         return numeros.map(
@@ -24,7 +25,18 @@ export default function megasena() {
             <div style={{display: "flex"}}>
                 {renderizarNumeros()}
             </div>
-            
+            <div>
+                <input 
+                    type="number" 
+                    min={6} max={20} 
+                    value={qtde}
+
+                />
+                <button onClick={() => setNumeros(mega(qtde))}>
+                    Gerar Aposta
+                </button>
+            </div>
+
         </div>
         
     )
